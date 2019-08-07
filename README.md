@@ -1,3 +1,7 @@
+<hr/>
+<h1>Brainlytic - A Face Recognition app.</h1>
+<hr/>
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
