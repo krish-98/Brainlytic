@@ -1,24 +1,18 @@
-import React from 'react';
+import React from 'react'
 
 class SignIn extends React.Component {
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			signInEmail: '',
-			signInPassword: ''
-		}
+	state = {
+		signInEmail: '',
+		signInPassword: '',
+		value: 'Sign In'
 	}
 
-	onEmailChange = event => {
-		this.setState({signInEmail: event.target.value})
-	}
+	onEmailChange = event => this.setState({signInEmail: event.target.value})
 
-	onPasswordChange = event => {
-		this.setState({signInPassword: event.target.value})
-	}
+	onPasswordChange = event => this.setState({signInPassword: event.target.value})
 
 	onSubmitSignIn = () => {
+		this.setState({ value: 'Submitting...' })
 		fetch('https://nameless-wildwood-37323.herokuapp.com/signin', {
 			method: 'post',
 			headers: {'Content-Type': 'application/json'},
@@ -27,11 +21,11 @@ class SignIn extends React.Component {
 				password: this.state.signInPassword
 			})
 		})
-			.then(response => response.json())
+			.then(res => res.json())
 			.then(user => {
 				if (user.id) {
-					this.props.loadUser(user);
-					this.props.onRouteChange('home');
+					this.props.loadUser(user)
+					this.props.onRouteChange('home')
 				}
 			})
 	}
@@ -71,7 +65,7 @@ class SignIn extends React.Component {
 								onClick={this.onSubmitSignIn}
 								className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib br3" 
 								type="submit" 
-								value="Sign In"
+								value={this.state.value}
 							/>
 						</div>
 						<div className="lh-copy mt3">
@@ -87,4 +81,4 @@ class SignIn extends React.Component {
 	}
 }
 
-export default SignIn;
+export default SignIn

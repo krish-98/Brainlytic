@@ -1,29 +1,21 @@
-import React from 'react';
+import React from 'react'
 
 class Register extends React.Component {
-	constructor (props) {
-		super(props)
-		
-		this.state = {
-			name: '',
-			email: '',
-			password: ''
-		}
+	state = {
+		name: '',
+		email: '',
+		password: '',
+		value: 'Register'
 	}
 
-	onNameChange = event => {
-		this.setState({name: event.target.value})
-	}
+	onNameChange = event => this.setState({name: event.target.value})
 
-	onEmailChange = event => {
-		this.setState({email: event.target.value})
-	}
+	onEmailChange = event => this.setState({email: event.target.value})
 
-	onPasswordChange = event => {
-		this.setState({password: event.target.value})
-	}
+	onPasswordChange = event => this.setState({password: event.target.value})
 
 	onSubmitSignIn = () => {
+		this.setState({ value: 'Submitting...' })
 		fetch('https://nameless-wildwood-37323.herokuapp.com/register', {
 			method: 'post',
 			headers: {'Content-Type': 'application/json'},
@@ -33,15 +25,15 @@ class Register extends React.Component {
 				password: this.state.password
 			})
 		})
-		.then(response => response.json())
-		.then(user => {
-			if (user.id) {
-				this.props.loadUser(user)
-				this.props.onRouteChange('home')
-			}
-		})
+			.then(res => res.json())
+			.then(user => {
+				if (user.id) {
+					this.props.loadUser(user)
+					this.props.onRouteChange('home')
+				}
+			})
 	}
-
+	
 	render() {
 		return (
 			<article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
@@ -83,7 +75,7 @@ class Register extends React.Component {
 							<input
 								className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib br3" 
 								type="submit" 
-								value="Register"
+								value={this.state.value}
 								onClick={this.onSubmitSignIn}
 							/>
 						</div>
@@ -94,4 +86,4 @@ class Register extends React.Component {
 	}
 }
 
-export default Register;
+export default Register
