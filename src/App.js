@@ -15,7 +15,7 @@ import './App.css'
 const particleOptions = {
 	"particles": {
 		"number": {
-			"value" : 200,
+			"value" : 100,
 			"density": {
 				"enable": true,
 				"value_area": 800
@@ -118,12 +118,12 @@ class App extends Component {
 				<Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
 				{ 
 					route === 'home'
-					? <div>
+					? <Fragment>
 							<Logo />
 							<Rank name={name} entries={entries} /> 
 							<ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
 							<FaceRecognition box={box} imageUrl={imageUrl} />
-						</div>
+						</Fragment>
 					: (
 						route === 'signin'
 						? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
